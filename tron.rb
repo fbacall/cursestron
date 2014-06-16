@@ -30,6 +30,7 @@ until stop do
   # Start game
   game = Game.new(width, height, players[0...player_count])
 
+  # Display controls for each player
   start_windows = game.players.map do |player|
     win = game.window.subwin(10, 16, player.position[1] - 5, player.position[0] - 8)
     win.box("|", "-")
@@ -49,11 +50,13 @@ until stop do
     win
   end
 
+  # Display game instructions
   instructions_str = "Press any key to start!"
   instructions = game.window.subwin(7, instructions_str.length + 4, (height / 2) - 4, (width - instructions_str.length + 4) / 2)
+  instructions.box('|', '-')
   instructions.setpos(2, 2)
   instructions.addstr(instructions_str)
-  instructions.setpos(4, 2)
+  instructions.setpos(4, 6)
   instructions.addstr("Press Q to quit")
   instructions.refresh
 
@@ -108,7 +111,7 @@ until stop do
   end
 
   t.join
-
+  if game.window.getch == 'n'
+    stop = true
+  end
 end
-
-game.window.close

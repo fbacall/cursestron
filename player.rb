@@ -5,10 +5,14 @@ class Player
   attr_reader :colour
   attr_reader :controls
   attr_accessor :score
+  attr_accessor :dead
 
   def initialize(controls, x, y, dirx, diry, number, colour)
     @start_position = [x,y]
     @start_direction = [dirx, diry]
+    @position = []
+    @direction = []
+
     @number = number
     @colour = colour
     @controls = { :up => controls[0],
@@ -20,8 +24,11 @@ class Player
   end
 
   def reset
-    @position = @start_position
-    @direction = @start_direction
+    @position[0] = @start_position[0]
+    @position[1] = @start_position[1]
+    @direction[0] = @start_direction[0]
+    @direction[1] = @start_direction[1]
+    @dead = false
   end
 
   def move
