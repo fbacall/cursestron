@@ -91,13 +91,13 @@ until stop do
         game.players.each do |player|
           case input
             when player.controls[:up]
-              player.direction = [0, -1]
+              player.direction = [0, -1] unless player.direction[1] == 1
             when player.controls[:down]
-              player.direction = [0, 1]
+              player.direction = [0, 1] unless player.direction[1] == -1
             when player.controls[:left]
-              player.direction = [-1, 0]
+              player.direction = [-1, 0] unless player.direction[0] == 1
             when player.controls[:right]
-              player.direction = [1, 0]
+              player.direction = [1, 0] unless player.direction[0] == -1
           end
         end
       end
